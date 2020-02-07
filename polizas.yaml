@@ -1,0 +1,64 @@
+openapi: 3.0.1
+info:
+  title: Polizas
+  description: Ejemplo de API de Polizas.
+  termsOfService: http://swagger.io/terms/
+  contact:
+    name: Jose Ramon
+    email: jose.ramon.de.la.huerga.ayuso@everis.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.0
+externalDocs:
+  description: Find out more about Swagger
+  url: http://swagger.io
+servers:
+- url: http://api.insurance.com/v1
+- url: https://api.insurance.com/v1
+paths:
+  /poliza/{id}:
+    get:
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: "200"
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/Poliza'
+components:
+  schemas:
+    Poliza:
+      title: Poliza
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 123
+        nombre_cliente:
+          type: string
+          example: "Antonio"
+        apellido_cliente:
+          type: string
+          example: "Garcia"
+        datos_variables:
+          $ref: '#/components/schemas/DatosVariables'
+      description: Una poliza
+    DatosVariables:
+      title: Datos Variables
+      type: object
+      properties:
+        ubicacion_schema:
+          type: string
+          example: "http://api.insurance.com/schemas/123"
+        data:
+          type: object
+          additionalProperties: true
+      description: Datos Variables
